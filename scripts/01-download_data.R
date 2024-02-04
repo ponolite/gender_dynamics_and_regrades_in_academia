@@ -1,26 +1,22 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Downloads and saves survey data to new file
+# Author: Faiza Imam, Catherine Punnoose, Quang Mai 
+# Data: survey.dta
+# Contact: finn.korol@mail.utoronto.ca, jayden.jung@mail.utoronto.ca, sofia.sellitto@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: Have downloaded survey.dta from https://doi.org/10.7910/DVN/QXJDJ5
+
+#loading packages
+library(readstata13)
+library(readr)
+
+#reading in the stata file
+instsurvey <- read.dta13(here::here("inputs/data/instsurvey.dta"))
+stdsurvey <- read.dta13(here::here("inputs/data/stdsurvey.dta"))
+experiment <- read.dta13(here::here("inputs/data/experiment.dta"))
 
 
-#### Workspace setup ####
-library(opendatatoronto)
-library(tidyverse)
-# [...UPDATE THIS...]
-
-#### Download data ####
-# [...ADD CODE HERE TO DOWNLOAD...]
-
-
-
-#### Save data ####
-# [...UPDATE THIS...]
-# change the_raw_data to whatever name you assigned when you downloaded it.
-write_csv(the_raw_data, "inputs/data/raw_data.csv") 
-
-         
+#writing to csv
+write_csv(survey, here::here("inputs/data/instsurvey.csv"))
+write_csv(survey, here::here("inputs/data/stdsurvey.csv"))
+write_csv(survey, here::here("inputs/data/experiment.csv"))
