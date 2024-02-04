@@ -17,6 +17,6 @@ experiment <- read.dta13(here::here("inputs/data/experiment.dta"))
 
 
 #writing to csv
-write_csv(survey, here::here("inputs/data/instsurvey.csv"))
-write_csv(survey, here::here("inputs/data/stdsurvey.csv"))
-write_csv(survey, here::here("inputs/data/experiment.csv"))
+write_csv(instsurvey, here::here("inputs/data/instsurvey.csv"))
+write_csv(stdsurvey, here::here("inputs/data/stdsurvey.csv"))
+write_csv(experiment, here::here("inputs/data/experiment.csv"))
