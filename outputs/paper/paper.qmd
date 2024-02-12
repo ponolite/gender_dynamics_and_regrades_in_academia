@@ -29,7 +29,7 @@ library(janitor)
 library(dplyr)
 
 # Load data
-inst_data <- read.csv(here::here("outputs/data/inst_data_cleaned.csv"))
+inst_data <- read.csv(here::here("inputs/data/inst_data_cleaned.csv"))
 
 std_data <- read_csv(here::here("inputs/data/stdsurvey.csv"))
 

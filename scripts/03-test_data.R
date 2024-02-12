@@ -17,13 +17,13 @@ library(janitor)
 
 # read cleaned data on arrests and strip searches
 std_data_cleaned = read_csv(
-  file = here("outputs/data/std_data_cleaned.csv"),
+  file = here("inputs/data/std_data_cleaned.csv"),
   show_col_types = FALSE
 )
 
 # read cleaned data on race and gender and strip searches
 inst_data_cleaned = read_csv(
-  file = here("outputs/data/inst_data_cleaned.csv"),
+  file = here("inputs/data/inst_data_cleaned.csv"),
   show_col_types = FALSE
 )
 

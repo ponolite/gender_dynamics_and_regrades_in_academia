@@ -2,7 +2,7 @@
 
 ## Overview of Repository
 
-This repository contains data, code and a paper that analyze the gender identities of college students  . The dataset used for analysis was retrieved from Open Data Toronto, under the package `Police Race and Identity Based Data - Arrests and Strip Searches`. 
+This repository contains data, code and a paper that analyze the gender identities of college students and whether or not this affects their regrade requests among professors. The dataset used for analysis was retrieved from openICPSR, under the package `Data and Code for: Ask and You Shall Receive?`. 
 
 ## File Structure
 
@@ -23,4 +23,5 @@ The repo is structured as the following:
 
 ## LLM Usage Statement
 
--   No Large Language Models (LLMs) were solicited during the writing of this paper. 
+-   ChatGPT 3.5 was used to help write a certain code portion within this paper. 
+

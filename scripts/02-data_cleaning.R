@@ -26,7 +26,7 @@ inst_data_cleaned <-
   select(id, maleup_fn, femaleup_fn, malesame_fn, femalesame_fn, maledown_fn, femaledown_fn) |>
   tidyr::drop_na()
 
-write_csv(inst_data_cleaned, "outputs/data/inst_data_cleaned.csv")
+write_csv(inst_data_cleaned, "inputs/data/inst_data_cleaned.csv")
 
 ### Cleaning Stdsurvey ###
 std_data <- read.csv("inputs/data/stdsurvey.csv")
@@ -39,7 +39,7 @@ std_data_cleaned <-
 
 
 #### Save Clean Stdsurvey data ####
-write_csv(std_data_cleaned, "outputs/data/std_data_cleaned.csv")
+write_csv(std_data_cleaned, "inputs/data/std_data_cleaned.csv")
 
 ### Cleaning Experiment ###
 #exp_data <- read.csv(here::here("inputs/data/experiment.csv"))
