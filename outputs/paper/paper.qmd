@@ -154,7 +154,6 @@ classes_dta$Gender[classes_dta$Gender == "0"] <- "Female"
 classes_dta |>
   filter(consider_regrade != "No") |>
   rename("Count" = n, "Number of Classes" = num_class, "Consider Regrade" = consider_regrade)
-
 head(classes_dta, 10) |>
   kable(
     col.names = c("Number of Classes", "Gender", "Consider Regrade", "Count", "Percentage"),
@@ -162,7 +161,9 @@ head(classes_dta, 10) |>
     align = c("c", "c", "c", "c", "c")
   )
 
+
 classes_dta |>
+filter(consider_regrade != "No") |>
 ggplot(aes(x = num_class, y = Percentage, fill = Gender)) + 
   geom_bar(stat="identity", position = "dodge") +
   theme_minimal() +
