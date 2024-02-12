@@ -8,27 +8,36 @@
 # Any other information needed? [...UPDATE THIS...]
 
 #### Workspace setup ####
+library(dplyr)
+library(tidyr)
+library(janitor)
 library(tidyverse)
 
 ### CLEANING DATA ###
 ### Cleaning Instructor	Survey	Data (instsurvey) ###
-inst_data <- read.csv(here::here("inputs/data/instsurvey.csv"))
+# Read data
+#inst_data <- read.csv(here::here("inputs/data/instsurvey.csv"))
+
+inst_data <- read.csv("inputs/data/instsurvey.csv")
+
 inst_data_cleaned <- 
   inst_data |>
   janitor::clean_names() |>
-  select(pctrequests_fn) |>
+  select(id, maleup_fn, femaleup_fn, malesame_fn, femalesame_fn, maledown_fn, femaledown_fn) |>
   tidyr::drop_na()
 
+write_csv(inst_data_cleaned, "outputs/data/inst_data_cleaned.csv")
 
 ### Cleaning Stdsurvey ###
-std_data <- read.csv(here::here("inputs/data/stdsurvey.csv"))
+std_data <- read.csv("inputs/data/stdsurvey.csv")
 
 std_data_cleaned <- 
   std_data |>
   janitor::clean_names() |>
-  select(std_female, std_standing, std_male, consider_regrade, everasked, num_class, num_asked) |>
-  tidyr::drop_na()
-  
+  select(participantcode, std_female, std_standing, std_male, consider_regrade, everasked, num_class, num_asked)
+
+
+
 #### Save Clean Stdsurvey data ####
 write_csv(std_data_cleaned, "outputs/data/std_data_cleaned.csv")
 

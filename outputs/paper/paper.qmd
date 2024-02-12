@@ -26,29 +26,154 @@ library(knitr)
 library(kableExtra)
 library(tidyverse)
 library(janitor)
+library(dplyr)
 
 # Load data
-# inst_data <- read.csv(here::here("inputs/data/instsurvey.csv"))
+inst_data <- read.csv(here::here("outputs/data/inst_data_cleaned.csv"))
+
 std_data <- read_csv(here::here("inputs/data/stdsurvey.csv"))
+
 # exp_data <- read.csv(here::here("inputs/data/experiment.csv"))
 ```
 
-# TESTING GRAPHS
+# FIGURE 3
 
-Our data (@tbl-studentgender).
+Our data (@tbl-figure3).
 
 ```{r}
-#| label: tbl-studentgender
-#| tbl-cap: "Number of students enrolled in class, by gender"
+#| label: tbl-figure3
+#| tbl-cap: "Instructor Survey: Regrade Results by Timing and Students’ Gender"
 #| warning: false
 #| message: false
 #| echo: false
 
-std_data |>
-  count(std_female) %>% 
+#Code Assisted from Chat GPT 3.5
+# End of Semester Results MALE 
+
+male_dta <- inst_data |>
+              select(maleup_fn, malesame_fn, maledown_fn)
+
+maleup_avg <- mean(male_dta$maleup_fn, na.rm = TRUE)
+malesame_avg <- mean(male_dta$malesame_fn, na.rm = TRUE)
+maledown_avg <- mean(male_dta$maledown_fn, na.rm = TRUE)
+
+males <- data.frame(
+  value = c(maleup_avg, malesame_avg, maledown_avg),
+  category = c("Grade Increase", "No Change", "Grade Decrease")
+)
+
+
+# Define the desired order of categories
+category_order <- c("Grade Decrease", "No Change", "Grade Increase")
+
+# Convert the 'category' variable to a factor with the specified order
+males$category <- factor(males$category, levels = category_order)
+
+# Set custom breaks for the y-axis
+custom_breaks <- seq(0, 90, by = 30)
+
+
+# Create a bar graph using ggplot
+ggplot(males, aes(x = category, y = value, fill = category)) + ylim(0, 90) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = round(value)), vjust = -0.5, size = 3) +  # Add labels on top of bars
+  labs(title = "Panel A. End of semester, male students",
+       x = "Category",
+       y = "Percent") + scale_fill_manual(values = c("Grade Increase" = "#4B659D", "No Change" = "#A83B48", "Grade Decrease" = "#B7BA9F")) +  # Adjust colors
+  scale_y_continuous(breaks = custom_breaks) +  # Set custom breaks for y-axis
+  theme_minimal()
+
+
+# End of Semester Results FEMALE 
+
+female_dta <- inst_data |>
+              select(femaleup_fn, femalesame_fn, femaledown_fn)
+
+femaleup_avg <- mean(female_dta$femaleup_fn, na.rm = TRUE)
+femalesame_avg <- mean(female_dta$femalesame_fn, na.rm = TRUE)
+femaledown_avg <- mean(female_dta$femaledown_fn, na.rm = TRUE)
+
+females <- data.frame(
+  value = c(femaleup_avg, femalesame_avg, femaledown_avg),
+  category = c("Grade Increase", "No Change", "Grade Decrease")
+)
+
+
+# Define the desired order of categories
+category_order <- c("Grade Decrease", "No Change", "Grade Increase")
+
+# Convert the 'category' variable to a factor with the specified order
+females$category <- factor(females$category, levels = category_order)
+
+# Set custom breaks for the y-axis
+custom_breaks <- seq(0, 90, by = 30)
+
+
+# Create a bar graph using ggplot
+ggplot(females, aes(x = category, y = value, fill = category)) + ylim(0, 90) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = round(value)), vjust = -0.5, size = 3) +  # Add labels on top of bars
+  labs(title = "Panel A. End of semester, female students",
+       x = "Category",
+       y = "Percent") + scale_fill_manual(values = c("Grade Increase" = "#4B659D", "No Change" = "#A83B48", "Grade Decrease" = "#B7BA9F")) +  # Adjust colors
+  scale_y_continuous(breaks = custom_breaks) +  # Set custom breaks for y-axis
+  theme_minimal()
+
+```
+
+
+# FIGURE 2
+
+Figure 2. Student Survey: Number of Classes Students Considered for Regrade Requests by Students’ Gender
+
+```{r}
+classes_dta <- std_data |>
+              select(std_male, num_class, consider_regrade)|>
+              rename(Gender = std_male) |>
+              filter(is.na(consider_regrade) | consider_regrade != "No")
+
+classes_dta <- classes_dta |>
+  group_by(num_class, Gender, consider_regrade) |>
+  count() |>
+  group_by(Gender, consider_regrade) |>
+  mutate(Percentage = round(n/sum(n)*100, 1))|>
+  mutate(num_class = case_match(num_class, 
+                             0 ~ "0 class",
+                             1 ~ "1 class",
+                             2 ~ "2 classes",
+                             3 ~ "3 classes",
+                             4 ~ "4 classes",
+                             5 ~ "5 classes"))
+ 
+classes_dta$consider_regrade[classes_dta$consider_regrade == "Yes"] <- "No"
+classes_dta$consider_regrade[is.na(classes_dta$consider_regrade)] <- "Yes"
+classes_dta$Gender[classes_dta$Gender == "1"] <- "Male"
+classes_dta$Gender[classes_dta$Gender == "0"] <- "Female"
+
+
+classes_dta |>
+  filter(consider_regrade != "No") |>
+  rename("Count" = n, "Number of Classes" = num_class, "Consider Regrade" = consider_regrade)
+
+head(classes_dta, 10) |>
   kable(
-    col.names = c("Gender", "Number of students")
+    col.names = c("Number of Classes", "Gender", "Consider Regrade", "Count", "Percentage"),
+    booktabs = TRUE,
+    align = c("c", "c", "c", "c", "c")
   )
+
+classes_dta |>
+ggplot(aes(x = num_class, y = Percentage, fill = Gender)) + 
+  geom_bar(stat="identity", position = "dodge") +
+  theme_minimal() +
+  theme(legend.key.size = unit(0.5, 'cm')) +
+  geom_text(aes(label=Percentage), position=position_dodge(width=0.9), vjust=-0.25) +
+  labs(x = "Classes",
+       y = "Distribution by gender (percent)") +
+  scale_fill_manual(values = c("Male" = "#4B659D", "Female" = "#A83B48")) +
+  scale_x_discrete(labels = c("0 class", "1 class", "2 classes", "3 classes", "4 classes", "5+ classes"))
+
+
 ```
 
 
