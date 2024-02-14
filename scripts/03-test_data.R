@@ -37,7 +37,6 @@ inst_data_cleaned$maledown_fn |> min() == 0
 inst_data_cleaned$femaledown_fn |> min() == 0
 
 
-
 # Test 2: check that the std dataset's num_class variable and see if it has minium 0 class and maximum 5 classes
 std_data_cleaned$num_class |> min() == 0
 std_data_cleaned$num_class |> max() == 5
