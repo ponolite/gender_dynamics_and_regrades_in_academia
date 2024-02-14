@@ -1,8 +1,8 @@
-# The Relationship Between Gender Identities and Regrades among Undergraduate Students, 2010-2016
+# Gender Dynamics in Academia: Analyzing Regrade Requests and Course Load Trends, 2010-2016
 
 ## Overview of Repository
 
-This repository contains data, code and a paper that analyze the gender identities of college students and whether or not this affects their regrade requests among professors. The dataset used for analysis was retrieved from openICPSR, under the package `Data and Code for: Ask and You Shall Receive?`. 
+This repository contains data, code and a paper that analyzes the gender identities of college students and whether or not this affects their regrade requests among professors. The dataset used for analysis was retrieved from openICPSR, under the package `Data and Code for: Ask and You Shall Receive?` by Li and Zahar. 
 
 ## File Structure
 
@@ -23,5 +23,5 @@ The repo is structured as the following:
 
 ## LLM Usage Statement
 
--   ChatGPT 3.5 was used to help write a certain code portion within this paper. 
+-   ChatGPT 3.5 was used to help write a certain code portion within this paper, receipts can be found in `usage.text`. 
 
