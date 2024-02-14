@@ -2,7 +2,7 @@
 title: "The Relationship Between Gender Identities and Regrades among Undergraduate Students, 2010-2016"
 subtitle: "A replication of Li and Zahar;"
 author: Faiza Imam, Quang Mai & Catherine Punnoose 
-thanks: "Code and data are available at: https://github.com/ponolite/gender_grade.git"
+thanks: "Code and data are available at: https://github.com/ponolite/gender_grade.git, DOI: 10.1257/pol.20210053"
 date: today
 date-format: long
 abstract: "Academia is a complex ecosystem that feeds off a network of social, cultural and innovative influences which often, stem beyond societal norms. This paper replicates the gender implications regarding results in college students and explores potential fluctuations in request patterns over a semester by specifically analyzing the number of classes taken by students and their willingness to submit a grade request throughout the semester. Our results show that there is a trend for female students to submit regrade requests while taking fewer courses compared to a higher course load. Female students experienced grade increases (3%) compared to their male counterparts. We call for further investigation around this topic to understand gender disparities within the world of academia. "
@@ -14,6 +14,7 @@ bibliography: references.bib
 
 ```{r}
 #| include: false
+#| echo: false
 #| warning: false
 #| message: false
 
@@ -29,7 +30,6 @@ library(dplyr)
 # Load data
 inst_data <- read.csv(here::here("inputs/data/inst_data_cleaned.csv"))
 std_data <- read_csv(here::here("inputs/data/stdsurvey.csv"))
-
 ```
 
 # Introduction
@@ -40,7 +40,7 @@ This begs the question of whether these unequal tendencies exist in higher educa
 
 Our paper will reproduce, ‘Ask and You Shall Receive? Gender differences in Regrades in College’ by Li and Zafar. Accordingly, we ascertain that upon a regrade request, males are more likely to receive a favourable grade change. Our study attempts to pose and answer these questions, ‘Does gender bias influence regrade requests in college settings? Are there fluctuations in regrade request patterns among male and female students regarding their class number?’ Structurally, our paper starts with a brief dissection of the original paper’s findings and our own interpretation of the data. Subsequently, we analyze the results garnered from the data with suitable tables, and double stacked bar charts. Finally, to conclude, we will discuss our findings, entailed by an analysis of the data’s loopholes, ethical biases and future research implications.
 
-Our replication package was sourced from the openICPSR Portal under the library `readstata13` package [@readStata13]. We retrieved two datasets–‘instsurvey.dta’ and ‘stdsurvey.dta’– and one code file–‘1_FiguresTables.do’–from the data package ‘DataCode’ to examine gender identities of undergraduate students from Colorado State University from 2010 to 2018 and their correlation to regrade requests [@]. Data was generated, extracted and cleaned using the open-source statistical programming language R [@r], leveraging functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `dplyr` [@rDplyr], `readr` [@rReadr], `tibble` [@rTibble], `janitor` [@rJanitor], `kableExtra` [@rKableExtra], and `knitr` [@rKnitr].
+Our replication package was sourced from the openICPSR Portal under the library `readstata13` package [@readStata13]. We retrieved two datasets–‘instsurvey.dta’ and ‘stdsurvey.dta’– and one code file–‘1_FiguresTables.do’–from the data package ‘DataCode’ to examine gender identities of undergraduate students from Colorado State University from 2010 to 2018 and their correlation to regrade requests [@GenderDiff]. Data was generated, extracted and cleaned using the open-source statistical programming language R [@r], leveraging functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `dplyr` [@rDplyr], `readr` [@rReadr], `tibble` [@rTibble], `janitor` [@rJanitor], `kableExtra` [@rKableExtra], and `knitr` [@rKnitr].
 
 
 # Data {#sec-data}
@@ -52,6 +52,68 @@ Published by the ‘American Economic Journal: Economic Policy’, this paper re
 
 Most prominent to our reproduction lies in the tactile grade changes of regrade requests based on each student’s gender identity. As such, we first simplified ‘instsurvey.dta’, which featured 190 observations. We cleaned the data by selecting relevant variables such as “maleup_fn”, “malesame_fn”, “maledown_fn”, “femaleup_fn”, “femalesame_fn”, “femaledown_fn”, “maleup_mt”, “malesame_mt”, “maledown_mt”, “femaleup_mt”, “femalesame_mt”, and “femaledown_mt”. The respective variables provide data on the number of male and female students whose grades increased, stayed the same or decreased both during and at the end of the semester. We further modified the data by calculating the mean of each variable using the mean() function. The mean is needed to determine the percentage of male or female students who received a grade increase, decrease, or no change. A new data frame is then created per focus area. In total four graphs were created to show the percentage of male and female students who received a grade increase, decrease, or no change after requesting for a regrade both during and at the end of the semester.   
 
+```{R}
+#| echo: false
+#| message: false
+#| label: tbl-genderTime
+#| tbl-cap: Table of Instructor Survey Regrade Results by Timing and Students’ Gender
+
+# Male Final Grade Data
+cleanInstData <- data.frame(
+  maleup_avg =  mean(inst_data$maleup_fn, na.rm = TRUE), 
+  malesame_avg = mean(inst_data$malesame_fn, na.rm = TRUE), 
+  maledown_avg = mean(inst_data$maledown_fn, na.rm = TRUE)
+)
+
+cleanInstData |>
+  kable(
+    col.names = c("Male: Final Grade Increase ", "Male: Final Grade Same ", "Male: Final Grade Decrease ") , 
+    align = c("c", "c", "c")
+  )
+
+
+# Female Final Grade Data
+cleanInstData <- data.frame(
+  femaleup_avg =  mean(inst_data$femaleup_fn, na.rm = TRUE), 
+  femalesame_avg = mean(inst_data$femalesame_fn, na.rm = TRUE), 
+  femaledown_avg = mean(inst_data$femaledown_fn, na.rm = TRUE)
+)
+
+cleanInstData |>
+  kable(
+    col.names = c("Female: Final Grade Increase ", "Female: Final Grade Same ", "Female: Final Grade Decrease "),
+    align = c("c", "c", "c")
+  )
+
+
+# Male During Semester Grade Data
+cleanInstData <- data.frame(
+  maleup_mt_avg  =  mean(inst_data$maleup_mt, na.rm = TRUE), 
+  malesame_mt_avg = mean(inst_data$malesame_mt, na.rm = TRUE), 
+  maledown_mt_avg = mean(inst_data$maledown_mt, na.rm = TRUE)
+)
+
+cleanInstData |>
+  kable(
+    col.names = c("Male: During Semester Grade Increase ", "Male: During Semester Grade Same ", "Male: During Semester Grade Decrease ") , 
+    align = c("c", "c", "c")
+  )
+
+# Female During Semester Grade Data
+cleanInstData <- data.frame(
+  femaleup_mt_avg  =  mean(inst_data$femaleup_mt, na.rm = TRUE), 
+  femalesame_mt_avg = mean(inst_data$femalesame_mt, na.rm = TRUE), 
+  femaledown_mt_avg = mean(inst_data$femaledown_mt, na.rm = TRUE)
+)
+
+cleanInstData |>
+  kable(
+    col.names = c("Female: During Semester Grade Increase ", "Female: During Semester Grade Same ", "Female: During Semester Grade Decrease ") , 
+    align = c("c", "c", "c")
+  )
+
+```
+
 
 ## Student Survey Data
 
@@ -59,18 +121,13 @@ Most prominent to our reproduction lies in the tactile grade changes of regrade 
 #| echo: false
 #| message: false
 #| label: tbl-genderclass
-#| tbl-cap: Cleaned Table of Number of Classes Students Considered for Regrade Requests by Students’ Gender
+#| tbl-cap: Table of Number of Classes Students Considered for Regrade Requests by Students’ Gender
 
 classes_dta <- std_data |>
-              select(std_male, num_class, consider_regrade)|>
-              rename(Gender = std_male) |>
-              filter(is.na(consider_regrade) | consider_regrade != "No")
+  select(std_male, num_class, consider_regrade)|>
+  rename(Gender = std_male) |>
+  filter(is.na(consider_regrade) | consider_regrade != "No")
 
-
-classes_dta$consider_regrade[classes_dta$consider_regrade == "Yes"] <- "No"
-classes_dta$consider_regrade[is.na(classes_dta$consider_regrade)] <- "Yes"
-classes_dta$Gender[classes_dta$Gender == "1"] <- "Male"
-classes_dta$Gender[classes_dta$Gender == "0"] <- "Female"
 
 classes_dta <- classes_dta |>
   group_by(num_class, Gender, consider_regrade) |>
@@ -78,18 +135,23 @@ classes_dta <- classes_dta |>
   group_by(Gender, consider_regrade) |>
   mutate(Percentage = round(n/sum(n)*100, 1))|>
   mutate(num_class = case_match(num_class, 
-                             0 ~ "0 class",
-                             1 ~ "1 class",
-                             2 ~ "2 classes",
-                             3 ~ "3 classes",
-                             4 ~ "4 classes",
-                             5 ~ "5 classes"))
+                                0 ~ "0 class",
+                                1 ~ "1 class",
+                                2 ~ "2 classes",
+                                3 ~ "3 classes",
+                                4 ~ "4 classes",
+                                5 ~ "5 classes"))
+
+classes_dta$consider_regrade[classes_dta$consider_regrade == "Yes"] <- "No"
+classes_dta$consider_regrade[is.na(classes_dta$consider_regrade)] <- "Yes"
+classes_dta$Gender[classes_dta$Gender == "1"] <- "Male"
+classes_dta$Gender[classes_dta$Gender == "0"] <- "Female"
 
 
 classes_dta |>
   filter(consider_regrade != "No") |>
-  rename("Count" = n, "Number of Classes" = num_class, "Consider Regrade" = consider_regrade)
-head(classes_dta, 10) |>
+  rename("Count" = n, "Number of Classes" = num_class, "Consider Regrade" = consider_regrade) |>
+  head(12) |>
   kable(
     col.names = c("Number of Classes", "Gender", "Consider Regrade", "Count", "Percentage"),
     booktabs = TRUE,
@@ -154,7 +216,7 @@ ggplot(males, aes(x = category, y = value, fill = category)) + ylim(0, 90) +
   labs(x = "Category",
        y = "Percent") + scale_fill_manual(values = c("Grade Increase" = "#4B659D", "No Change" = "#A83B48", "Grade Decrease" = "#B7BA9F")) +  # Adjust colors
   scale_y_continuous(breaks = custom_breaks) +  # Set custom breaks for y-axis
-  theme_minimal()
+  theme_minimal() + theme(legend.position = "bottom")
 
 
 # End of Semester Results FEMALE 
@@ -188,7 +250,7 @@ ggplot(females, aes(x = category, y = value, fill = category)) + ylim(0, 90) +
   labs(x = "Category",
        y = "Percent") + scale_fill_manual(values = c("Grade Increase" = "#4B659D", "No Change" = "#A83B48", "Grade Decrease" = "#B7BA9F")) +  # Adjust colors
   scale_y_continuous(breaks = custom_breaks) +  # Set custom breaks for y-axis
-  theme_minimal()
+  theme_minimal() + theme(legend.position = "bottom")
 
 # During Semester Results MALE 
 
@@ -222,7 +284,7 @@ ggplot(males_mt, aes(x = category, y = value, fill = category)) + ylim(0, 90) +
   labs(x = "Category",
        y = "Percent") + scale_fill_manual(values = c("Grade Increase" = "#4B659D", "No Change" = "#A83B48", "Grade Decrease" = "#B7BA9F")) +  # Adjust colors
   scale_y_continuous(breaks = custom_breaks) +  # Set custom breaks for y-axis
-  theme_minimal()
+  theme_minimal() + theme(legend.position = "bottom")
 
 
 # During Semester Results FEMALE 
@@ -256,7 +318,7 @@ ggplot(females_mt, aes(x = category, y = value, fill = category)) + ylim(0, 90) 
   labs(x = "Category",
        y = "Percent") + scale_fill_manual(values = c("Grade Increase" = "#4B659D", "No Change" = "#A83B48", "Grade Decrease" = "#B7BA9F")) +  # Adjust colors
   scale_y_continuous(breaks = custom_breaks) +  # Set custom breaks for y-axis
-  theme_minimal()
+  theme_minimal() + theme(legend.position = "bottom")
 
 ```
 
