@@ -1,11 +1,10 @@
 #### Preamble ####
-# Purpose: Cleans the raw plane data recorded by two observers..... [...UPDATE THIS...]
+# Purpose: Clean up the survey.dta from https://doi.org/10.7910/DVN/QXJDJ5. Specifically selecting columns participantcode, std_female, std_standing, std_male, consider_regrade, everasked, num_class, num_asked).
 # Author: Catherine Punnoose, Quang Mai, Faiza Imam 
 # Date: 13 Feb 2024 
 # Contact: catherine.punnoose@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: 01-download_data.R
 
 #### Workspace setup ####
 library(dplyr)
