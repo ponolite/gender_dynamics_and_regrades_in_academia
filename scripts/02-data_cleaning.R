@@ -1,5 +1,9 @@
 #### Preamble ####
+<<<<<<< HEAD
 # Purpose: Cleans the data collected from the article ‘Ask and You Shall Receive? Gender differences in Regrades in College’
+=======
+# Purpose: Clean up the survey.dta from https://doi.org/10.7910/DVN/QXJDJ5. Specifically selecting columns participantcode, std_female, std_standing, std_male, consider_regrade, everasked, num_class, num_asked).
+>>>>>>> 3d9be9f6bb0cc6db6eb351c33fca37c617e7c9c0
 # Author: Catherine Punnoose, Quang Mai, Faiza Imam 
 # Date: 13 Feb 2024 
 # Contact: catherine.punnoose@mail.utoronto.ca, q.mai@mail.utoronto.ca, faiza.imam@mail.utoronto.ca
