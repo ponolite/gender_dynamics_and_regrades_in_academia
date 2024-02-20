@@ -2,7 +2,7 @@
 # Purpose: Simulates dataset of correlation between gender identities and regrades among undergraduate students, 2010-2016 
 # Author: Quang Mai, Catherine Punnoose and Faiza Imam
 # Date: 12 February 2024 
-# Contact:
+# Contact: catherine.punnoose@mail.utoronto.ca, q.mai@mail.utoronto.ca, faiza.imam@mail.utoronto.ca
 # License: MIT
 
 

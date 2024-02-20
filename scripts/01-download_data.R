@@ -2,7 +2,7 @@
 # Purpose: Downloads and saves survey data to new file
 # Author: Faiza Imam, Catherine Punnoose, Quang Mai 
 # Data: survey.dta
-# Contact: 
+# Contact: catherine.punnoose@mail.utoronto.ca, q.mai@mail.utoronto.ca, faiza.imam@mail.utoronto.ca
 # License: MIT
 # Pre-requisites: Have downloaded survey.dta from https://doi.org/10.7910/DVN/QXJDJ5
 

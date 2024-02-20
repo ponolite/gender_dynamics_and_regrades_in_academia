@@ -3,7 +3,7 @@
 # Purpose: Tests cleaned datasets 
 # Author: Quang Mai, Catherine Punnoose and Faiza Imam
 # Date: 11 February 2024
-# Contact:
+# Contact: catherine.punnoose@mail.utoronto.ca, q.mai@mail.utoronto.ca, faiza.imam@mail.utoronto.ca
 # License: MIT
 # Pre-requisites: reload 01-download_data.R and 02-data_cleaning.R
 
