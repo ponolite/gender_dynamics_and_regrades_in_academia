@@ -16,16 +16,11 @@ library(janitor)
 #### Read in cleaned data ####
 
 # read cleaned data on arrests and strip searches
-std_data_cleaned = read_csv(
-  file = here("inputs/data/std_data_cleaned.csv"),
-  show_col_types = FALSE
-)
+std_data_cleaned <- read.csv("inputs/data/cleaned data/std_data_cleaned.csv")
+
 
 # read cleaned data on race and gender and strip searches
-inst_data_cleaned = read_csv(
-  file = here("inputs/data/inst_data_cleaned.csv"),
-  show_col_types = FALSE
-)
+inst_data_cleaned <- read.csv("inputs/data/cleaned data/inst_data_cleaned.csv")
 
 
 #### Test data ####
@@ -58,8 +53,8 @@ std_data_cleaned$std_male |> unique() |> length() == 2
 
 
 
-# Test 6: check that there are 127 observations in the inst_data_cleaned dataset
-inst_data_cleaned$id |> unique() |> length() == 127
+# Test 6: check that there are 115 observations in the inst_data_cleaned dataset
+inst_data_cleaned$id |> unique() |> length() == 115
 
 
 # Test 7: check that there are maximum 100 maleup/femaleup and 0 minimum maleup/femaleup in inst_data_cleaned
@@ -73,6 +68,10 @@ inst_data_cleaned$femaleup_fn  |> max() == 100
 # Test 8: check that there are minimum malesame/femalesame in inst_data_cleaned
 inst_data_cleaned$malesame_fn |> min() == 0
 inst_data_cleaned$femalesame_fn |> min() == 0
+
+# Test 9: check that there are  2 genders in inst_data_cleaned
+inst_data_cleaned$inst_gender |> unique() |> length() == 2
+
 
 
 

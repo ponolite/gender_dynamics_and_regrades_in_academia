@@ -19,7 +19,7 @@ library(tidyverse)
 ### CLEANING DATA ###
 ### Cleaning Instructor	Survey	Data (instsurvey) ###
 # Read data
-inst_data <- read.csv("inputs/data/instsurvey.csv")
+inst_data <- read.csv("inputs/data/raw data/instsurvey.csv")
 
 inst_data_cleaned <- 
   inst_data |>
@@ -32,10 +32,10 @@ inst_data_cleaned <-
   tidyr::drop_na()
 
 #### Save Clean Instsurvey data ####
-write_csv(inst_data_cleaned, "inputs/data/inst_data_cleaned.csv")
+write_csv(inst_data_cleaned, "inputs/data/cleaned data/inst_data_cleaned.csv")
 
 ### Cleaning Stdsurvey ###
-std_data <- read.csv("inputs/data/stdsurvey.csv")
+std_data <- read.csv("inputs/data/raw data/stdsurvey.csv")
 
 std_data_cleaned <- 
   std_data |>
@@ -43,6 +43,4 @@ std_data_cleaned <-
   select(participantcode, std_female, std_standing, std_male, consider_regrade, everasked, num_class, num_asked)
 
 #### Save Clean Stdsurvey data ####
-write_csv(std_data_cleaned, "inputs/data/std_data_cleaned.csv")
-
-
+write_csv(std_data_cleaned, "inputs/data/cleaned data/std_data_cleaned.csv")

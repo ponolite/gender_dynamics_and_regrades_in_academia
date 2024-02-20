@@ -11,12 +11,9 @@ library(readstata13)
 library(readr)
 
 #reading in the stata file
-instsurvey <- read.dta13(here::here("inputs/data/instsurvey.dta"))
-stdsurvey <- read.dta13(here::here("inputs/data/stdsurvey.dta"))
-experiment <- read.dta13(here::here("inputs/data/experiment.dta"))
-
+instsurvey <- read.dta13(here::here("inputs/data/raw data/instsurvey.dta"))
+stdsurvey <- read.dta13(here::here("inputs/data/raw data/stdsurvey.dta"))
 
 #writing to csv
-write_csv(instsurvey, here::here("inputs/data/instsurvey.csv"))
-write_csv(stdsurvey, here::here("inputs/data/stdsurvey.csv"))
-write_csv(experiment, here::here("inputs/data/experiment.csv"))
+write_csv(instsurvey, here::here("inputs/data/raw data/instsurvey.csv"))
+write_csv(stdsurvey, here::here("inputs/data/raw data/stdsurvey.csv"))

@@ -4,7 +4,7 @@ author: Faiza Imam, Quang Mai & Catherine Punnoose
 thanks: "Code and data are available at: https://github.com/ponolite/gender_grade.git, DOI: https://doi.org/10.48152/ssrp-bjze-cn68"
 date: today
 date-format: long
-abstract: "Academia often exacerbates gender differences. This paper further explores the gender implications behind regrade requests of undergraduate students at Colorado State University from 2010-2016. By analyzing changes in regrade request patterns throughout the semester, actual grade changes, and instructor’s gender identity, our results show that on average male students are more likely to submit regrade requests, and are more likely–even when they request regrade for more courses–to have better grade changes compared to female students. In addition, extrapolation on the original study seems to suggest that both female and male instructors are more likely to give out favourable regrades for female students, which raises interesting questions on gender dynamics and regrading in the college setting."
+abstract: "Academia often aggravates gender differences. This paper then aims to explore the gendered nature of regrade requests by undergraduate students at Colorado State University from 2010-2016. Through analyzing changes in regrade request patterns, regrade outcomes, and instructors’ gender identity, our results show that on average male students are more likely to submit regrade requests, and are more likely to have better grade changes compared to female students. In contrast, extrapolation on the original study suggests that both female and male instructors are more likely to favourably regrade female students, which raises interesting questions on gender dynamics in the college setting."
 format: pdf
 fig-pos: 'H'
 toc: true
@@ -29,18 +29,18 @@ library(janitor)
 library(dplyr)
 
 # Load data
-inst_data <- read.csv(here::here("inputs/data/inst_data_cleaned.csv"))
-std_data <- read_csv(here::here("inputs/data/stdsurvey.csv"))
-inst_data_cleaned <- read_csv(here::here("inputs/data/inst_data_cleaned.csv"))
+inst_data <- read.csv(here::here("inputs/data/raw data/instsurvey.csv"))
+std_data <- read_csv(here::here("inputs/data/raw data/stdsurvey.csv"))
+inst_data_cleaned <- read_csv(here::here("inputs/data/cleaned data/inst_data_cleaned.csv"))
 ```
 
 # Introduction {#sec-intro}
 
-It’s a societal norm that we consider men to be assertive and dominant in leadership roles while women are nurturing and supportive. Often, women who choose to break out of these stereotypes and speak out against misogyny and sexism are labelled ‘emotional’ or ‘aggressive’, hindering their professional mobility [@AACSB].  Even in academic settings, women tend to be penalized when achieving better grades and opportunities. A study conducted by Natasha Quadlin, suggests that due to traditional, gendered stereotypes, women’s academic achievements are often disregarded compared to their male counterparts when both enter the labour market. Men of ‘high-achieving’ academic backgrounds tend to get favourable callbacks for interviews compared to their female counterparts with the same credentials [@SageJournals]. 
+It’s a social norm that we consider men to be assertive and dominant, while women nurturing and supportive. Often, women who choose to break out of these stereotypes are labelled ‘emotional’ or ‘aggressive’, hindering their professional mobility [@AACSB]. Even in academic settings, women tend to be penalized when achieving better grades and opportunities. A study conducted by Natasha Quadlin, suggests that due to traditional, gendered stereotypes, women’s academic achievements are often disregarded compared to their male counterparts when both enter the labour market. Men of ‘high-achieving’ academic backgrounds tend to get favourable callbacks for interviews compared to their female counterparts with the same credentials [@SageJournals]. 
 
-This begs whether these unequal tendencies exist in higher education for women, as they attempt to have their academic achievements recognized by requesting regrades. There are many reasons to account for when analyzing gendered inequality. First, being subjected to societal norms, women tend to be more non-confrontational, resulting in them accepting their academic results as they are instead of fighting for them [@AACSB]. Second, with differing confidence levels and personalities, women tend to second-guess their abilities, hence preventing them from requesting aid from their institutions as they see the entire process as ‘tedious’ and “unnecessary’ [@SageJournals]. Lastly, fear of rejection, women tend to harbour higher levels of stress and embarrassment when considering regrade requests as they assume that the result will often be a rejection from their instructors [@SageJournals]. A paper published by the American Journal of Political Science by Li and Zahar delves into the differences that arise between genders when requesting grade changes among college students from Colorado State University from 2010 to 2018. According to their findings, male students are more likely to request grade changes than their female counterparts, accounting for 18.6% higher of receiving a favourable grade change. Regardless of the class number, males are more likely to ask for grade changes throughout the semester [@InsideHigherEd]. Overall there is a gender disparity among college students regarding regrade requests. Hence, by examining biases inherent within higher education, the paper contributes to understanding the power dynamics between two gender demographics. In addition, to extrapolate from the original paper, our paper combines the student regrade data with instructors’ gender to see if there is gender dynamics between the two. 
+As such, whether or not these unequal tendencies exist in higher education for women-especially in the context of requesting regrade-is an important question to ask. There is already much research attempted to answer this problem space. First, being subjected to social norms, women tend to be more non-confrontational, resulting in them accepting their academic results as they are instead of fighting for them [@AACSB]. Second, with differing confidence levels and personalities, women tend to second-guess their abilities, hence preventing them from requesting aid from their institutions as they see the entire process as ‘tedious’ and “unnecessary’ [@SageJournals]. Lastly, fear of rejection and being viewed negatively by instructors, women tend to harbor higher levels of stress when considering regrades [@SageJournals]. A paper published by the American Journal of Political Science by Li and Zahar focuses into the gendered differences in regrade outcomes among college students from Colorado State University from 2010 to 2016. According to their findings, male students are more likely to request grade changes than their female counterparts. Regardless of the class number as well, males are more likely to ask for regrades throughout the semester [@InsideHigherEd]. Overall, there is a gender disparity among college students regarding regrade requests.
 
-Thus, from the paper, ‘Ask and You Shall Receive? Gender differences in Regrades in College’ by Li and Zafar, we hope to look into the estimand that upon a regrade request, whether or not an instructor’s gender identity–when interacted with a student’s gender identity– affects the outcome of such a student’s re-grading. Our study attempts to pose and answer these questions, ‘Does gender bias influence regrade requests in college settings?’, ‘Are there fluctuations in regrade request patterns among male and female students regarding their class number?’ and ‘Is there a correlation between instructor's gender and the regrading process?’
+Then, while the paper, ‘Ask and You Shall Receive? Gender differences in Regrades in College’ by Li and Zafar focuses on students' gender and regrades, we moreso look into the estimand that, upon a regrade request, whether or not an instructor’s gender identity–when interacted with a student’s gender identity–affects the regrade outcome. Our study attempts to answer this question, ‘Is there a correlation between instructor's gender and the regrading process?’ Hence, by examining biases inherent within higher education, the paper aims to assess the relationship between regrade requests and gender identity, especially the complex dynamics between instructors' and students' gender identity.
 
 Structurally, in @sec-intro, our paper starts with a brief dissection of the original paper’s findings and our interpretation of the data. Subsequently, in @sec-data and @sec-results, we analyze the results garnered from the data with suitable tables and double-stacked bar charts. Finally, to conclude, we will discuss our findings in @sec-discussion, which entailed an analysis of the data’s loopholes, ethical biases and future research implications.
 
@@ -48,13 +48,13 @@ Our replication package was sourced from the openICPSR Portal under the library 
 
 # Data {#sec-data}
 
-Published by the ‘American Economic Journal: Economic Policy’, this paper reproduced the paper ‘Ask and You Shall Receive? Gender Differences in Regrades in College’ and its replication package published on `openICPSR` [@openICPSR].  This data package conveys information related to survey data from instructors and students on the pervasiveness of regrade requests based on gender identities from 2010 to 2018. Particularly, ‘instsurvey.dta’ contains all 190 observations of actual regrade requests in 2018, along with 61 variables concerning the nature of each regrade request and whether or not each instance initiated grade changes. On the other hand, ‘stdsurvey.dta’ conveys all 3885 observations of student surveyees who have contemplated requesting regrades, with 52 variables detailing instances where they didn’t initiate such requests. With these two datasets representing two perspectives on regrade requests, there is much power dynamic to unpack, helping this paper assess the gendered nature of regrade requests in the undergraduate setting.
+This paper reproduced the paper ‘Ask and You Shall Receive? Gender Differences in Regrades in College’ and its replication package published on `openICPSR` [@openICPSR].  This data package conveys information related to survey data from instructors and students on the pervasiveness of regrade requests based on gender identities from 2010 to 2018. Particularly, ‘instsurvey.dta’ contains all 190 observations of actual regrade requests in 2018, along with 61 variables concerning the nature of each regrade request and whether or not each instance initiated grade changes. On the other hand, ‘stdsurvey.dta’ conveys all 3885 observations of student surveyees who have contemplated requesting regrades, with 52 variables detailing instances where they didn’t initiate such requests. With these two datasets representing two perspectives on regrade requests, there is much power dynamic to unpack, helping this paper assess the gendered nature of regrade requests in the undergraduate setting.
 
 ## Instructor Survey Data
 
 Most prominent to our reproduction lies in the tactile grade changes of regrade requests based on each student’s gender identity. As such, we first simplified ‘instsurvey.dta’, which featured 190 observations. We cleaned the data by selecting relevant variables such as “maleup_fn”, “malesame_fn”, “maledown_fn”, “femaleup_fn”, “femalesame_fn”, “femaledown_fn”, “maleup_mt”, “malesame_mt”, “maledown_mt”, “femaleup_mt”, “femalesame_mt”, “femaledown_mt” and “inst_gender”. The respective variables provide data on the number of male and female students whose grades increased, stayed the same or decreased both during and at the end of the semester along with the instructor’s gender in each case. We further modified the data by calculating the mean of each variable using the mean() function. The mean is needed to determine the percentage of male or female students who received a grade increase, decrease, or no change. A new data frame is then created per focus area. In total four graphs were created to show the percentage of male and female students who received a grade increase, decrease, or no change after requesting for a regrade both during and at the end of the semester. 
 
-Further, to analyze the differences in favourable regrades between male and female instructors, we renamed the original variable, “inst_female”  into “inst_gender”. We also changed “0” into “Male” and “1” into “Female to clarify the dataset. After that, we attempt to create four bar graphs to assess the correlation between instructors’ gender identity and favourable grade increases.
+Further, to analyze the differences in favorable regrades amng male and female instructors, we renamed the original variable, “inst_female”  into “inst_gender”. We also changed “0” into “Male” and “1” into “Female to clarify the dataset. After that, we attempt to create four bar graphs and two scatter-plots to assess the correlation between instructors’ gender and favorable regrades.
 
 ```{R}
 #| echo: false
@@ -178,8 +178,8 @@ Both @fig-RegreadeResultsByTime-1 and @fig-RegreadeResultsByTime-2 show that mos
 
 ```{r}
 #| label: fig-RegreadeResultsByTime
-#| fig-cap: Instructor Survey Regrade Results by Timing and Students’ Gender
-#| fig-subcap: [Panel A. End of semester male students, Panel B. End of semester female students, Panel C. During semester male students, Panel D. During semester female students]
+#| fig-cap: Regrade Results by Timing and Students’ Gender
+#| fig-subcap: [End of semester male students, End of semester female students, During semester male students, During semester female students]
 #| layout-ncol: 2
 #| warning: false
 #| message: false
@@ -345,7 +345,7 @@ However, as the number of classes extended above 1, or from 2 to 5 or more class
 
 ```{r}
 #| label: fig-RegradeByClass
-#| fig-cap: Student Survey Number of Classes Students Considered for Regrade Requests by Students’ Gender
+#| fig-cap: Number of Classes Students Considered for Regrade Requests by Students’ Gender
 #| warning: false
 #| message: false
 #| echo: false
@@ -372,13 +372,13 @@ The original paper looked to analyze the gender differences among undergraduate 
 
 ## Male and Female Regrade Outcomes
 
-One key point to consider is the disparity in outcomes between male and female students when requesting a regrade. The data shows that a higher percentage of male students (62%) received no change in their grade after requesting a regrade during the semester compared to female students (59%). This explains the notion that males typically send out higher requests of regrades compared to their female counterparts. This could be attributed to the social implications placed on each gender, confirming the concept that men are more assertive hence their inclination to ask for regrades. Women are more accepting hence they refrain from attempting to submit a request [@AACSB]. When looking at the percentage of students who received an increase in their grade after requesting a regrade, it turns out that a higher proportion of female students (40%) experienced this outcome than male students (37%). This suggests that, although male students were less successful overall in achieving grade changes when changes did occur, they were slightly more likely to increase for female students. Statistically, this 3% difference in outcomes, does not explain a great deal regarding the skewed gender implications but further research is required to understand the broader implications.
+Within @fig-RegreadeResultsByTime, one key point to consider is the disparity in outcomes between male and female students when requesting a regrade. The data shows that a higher percentage of male students (62%) received no change in their grade after requesting a regrade during the semester compared to female students (59%). This explains the notion that males typically send out higher requests of regrades compared to their female counterparts. This could be attributed to the social implications placed on each gender, confirming the concept that men are more assertive hence their inclination to ask for regrades. Women are more accepting hence they refrain from attempting to submit a request [@AACSB]. When looking at the percentage of students who received an increase in their grade after requesting a regrade, it turns out that a higher proportion of female students (40%) experienced this outcome than male students (37%). This suggests that, although male students were less successful overall in achieving grade changes when changes did occur, they were slightly more likely to increase for female students. Statistically, this 3% difference in outcomes, does not explain a great deal regarding the skewed gender implications but further research is required to understand the broader implications.
 
 ```{r}
 #| label: fig-RegreadeResultsByInstGenderFinal
-#| fig-cap: Instructor Survey End of Semester Regrade Results by Gender of Students and Gender of Instructor
-#| fig-subcap: ["Panel A.  End of Semester Grades, Male Instructors", "Panel B. End of Semester Grades, Female Instructors"]
-#| layout-ncol: 1
+#| fig-cap: End of Semester Regrade Results by Student and Instructor Gender
+#| fig-subcap: ["End of Semester Grades, Male Instructors", "End of Semester Grades, Female Instructors"]
+#| layout-ncol: 2
 #| warning: false
 #| message: false
 #| echo: false
@@ -470,9 +470,9 @@ ggplot(inst_results_male, aes(x = category, y = value, fill = student)) +
 
 ```{r}
 #| label: fig-RegreadeResultsByInstGenderDuring
-#| fig-cap: Instructor Survey During Semester Regrade Results by Gender of Students and Gender of Instructor
-#| fig-subcap: ["Panel A.  During Semester Grades, Male Instructors", "Panel B. During Semester Grades, Female Instructors"]
-#| layout-ncol: 1
+#| fig-cap: During Semester Regrade Results by Student and Instructor Gender
+#| fig-subcap: ["During Semester Grades, Male Instructors", "During Semester Grades, Female Instructors"]
+#| layout-ncol: 2
 #| warning: false
 #| message: false
 #| echo: false
@@ -562,12 +562,12 @@ ggplot(inst_results_male, aes(x = category, y = value, fill = student)) +
 
 ```
 
-However, there appears to be a different trend, looking at @fig-RegreadeResultsByInstGenderFinal and @fig-RegreadeResultsByInstGenderDuring. These graphs provide the average percentage of students’ regrade outcomes by the gender of the instructors. In particular, for both male and female instructors, during the semester or at the end of the semester, female students are more likely to receive a grade increase if they do ask for regrades, at respectively 39% and 20% (male instructors) and 35% and 21% (female instructors). When coupled with data on the distribution of grade increase by instructors’ gender too, the dataset also reveals a similar trend. From @fig-RegreadeResultsByTimeGenderLine, when marked by male instructors, male students are more likely to receive a 0-10% grade increase compared to their female counterparts, whose grades increased by 12.5-25%. As for regrades during the semester, male and female students give out similarly favourable grade increases. However, female instructors are slightly more likely to give higher grade increases to female students compared to male students. We had assumed that male students would have favourable increases from both male and female instructors. However, with this new insight from analyzing regrades and instructor’s gender identity, we see that both female and male instructors give out more grade increases upon regrading to female students compared to male students. This could be attributed to the new social norm to ‘lift’ up these students to promote a more equal playing field.
+However, there appears to be a different trend, looking at @fig-RegreadeResultsByInstGenderFinal and @fig-RegreadeResultsByInstGenderDuring. These graphs provide the average percentage of students’ regrade outcomes by the gender of the instructors. In particular, for both male and female instructors, during the semester or at the end of the semester, female students are more likely to receive a grade increase if they do ask for regrades, at respectively 39% and 20% (male instructors) and 35% and 21% (female instructors). When coupled with data on the distribution of grade increase by instructors’ gender too, the dataset also reveals a similar trend. From @fig-RegreadeResultsByTimeGenderLine, when marked by male instructors, male students are more likely to receive a 0-10% grade increase compared to their female counterparts, whose grades increased by 12.5-25%, observable in the blue clusters in the bottom left of both graphs and how they are more skewed towards the x-axis. As for regrades during the semester, male and female students give out similarly favourable grade increases due to the similar correlation lines. However, female instructors are slightly more likely to give higher grade increases to female students compared to male students, as observed in the red correlation line being more skewed towards the x-axis. We had assumed that male students would have favourable increases from both male and female instructors. However, with this new insight from analyzing regrades and instructor’s gender identity, we see that both female and male instructors give out more grade increases upon regrading to female students compared to male students. This could be attributed to the new social norm to ‘lift’ up these students to promote a more equal playing field.
 
 ```{r}
 #| label: fig-RegreadeResultsByTimeGenderLine
-#| fig-cap: Instructor Survey Regrade Results by Timing, Students’ Gender and Gender of Instructor
-#| fig-subcap: [Panel A. End of Semester Regrade Increase, Panel B. During Semester Regrade Increase]
+#| fig-cap: Regrade Results by Timing, Students’ Gender and Gender of Instructor
+#| fig-subcap: [Regrade Increase End of Semester, Regrade Increase During Semester]
 #| layout-ncol: 2
 #| warning: false
 #| message: false
@@ -580,7 +580,7 @@ inst_data_cleaned |>
   ggplot(aes(x=femaleup_fn, y= maleup_fn, color=inst_gender)) +
   geom_point() +
   geom_smooth(method="lm", se=FALSE) +
-  labs(title="Male & Female Regrade Increase By Instructor, End of Semester", x="Female Student Grade Increase Percentage", y="Male Student Grade Increase Percentage", color= "Instructor Gender") +
+  labs(x="Female Student Grade Increase Percentage", y="Male Student Grade Increase Percentage", color= "Instructor Gender") +
   scale_color_manual(values=c("#A83B48","#4B659D"), labels=c("Female","Male")) +
   theme_minimal()
 
@@ -591,26 +591,25 @@ inst_data_cleaned |>
   ggplot(aes(x=femaleup_mt, y= maleup_mt, color=inst_gender)) +
   geom_point() +
   geom_smooth(method="lm", se=FALSE) +
-  labs(title="Male & Female Regrade Increase By Instructor, During Semester", x="Female Student Grade Increase Percentage", y="Male Student Grade Increase Percentage",  color= "Instructor Gender") +
+  labs(x="Female Student Grade Increase Percentage", y="Male Student Grade Increase Percentage",  color= "Instructor Gender") +
   scale_color_manual(values=c("#A83B48","#4B659D"), labels=c("Female","Male")) +
   theme_minimal()
 
 ```
 
-@fig-RegreadeResultsByTimeGenderLine also projects that, compared to regrades during the semester, instructors are more likely to provide favourable grade increases for regrades at the end of the semester. This trend of grade increase at the end of the semester could be attributed to the notion that at the end of the semester, instructors can see student progress throughout the course thus adjusting in areas upon requests made. Male instructors, in particular, are more likely to give out a substantial grade increase (by 50-100%) compared to female instructors. While female instructors do give favourable grade increases, this occurs more often in the 0-50% increase range.
+@fig-RegreadeResultsByTimeGenderLine also projects that, compared to regrades at the end of the semester, instructors are more likely to provide favorable grade increases for regrades during the semester, as seen in the consistent grade increase of both male and female students in the second scatter-plot. This trend of grade increase during the semester could be attributed to the notion that  during the semester, the grades' weight are less impactful throughout the course thus making grade adjustment easier. Male instructors, in particular, are more likely to give out consistent and substantial grade increases (by 50-100%) to both male and female students compared to female instructors, as observed in the blue clusters on the top right of each graph and how they are closely aligned with the correlation lines. While female instructors do give favorable grade increases, this occurs more often in the 0-50% increase range and more inconsistently, observable in the red clusters in the bottom left of both graphs and how they are more scattered.
 
-## Trends Among Female Students and Course Load
+## Trends Among Student Gender and Regrade Requests for Different Number of Classes
 
-Another trend suggests that regrade consideration between male and female students is attributed to the number of courses they are taking. Female students are more inclined to submit regrade requests when taking fewer courses as 30.4% consider a regrade request when taking one course, while male students consideration is around 22.7%. However, when the course load is higher the trend is reversed. More male students submit or consider regrade requests compared to their female counterparts. At three classes, 8.9% of males consider regrades compared to 7.1% of females, and at five classes or more, 5.2% of males consider regrades compared to only 2.1% of females. 
+Another trend from @fig-RegradeByClass suggests that regrade consideration between male and female students depends on the number of classes that they have. Female students are more inclined to submit regrade requests when taking fewer courses as 30.4% consider a regrade request when taking one course, compared to 22.7% of male students. However, when the course load is higher the trend is reversed. More male students submit or consider regrade requests compared to their female counterparts. At three classes, 8.9% of males consider regrades compared to 7.1% of females, and at five classes or more, 5.2% of males consider regrades compared to only 2.1% of females. 
 
-This trend suggests that males are more likely to consider and ask for regrades compared to females in all categories of classes, except for those with 1 class. This translates to the fact that, speculatively, males are more likely to consider for regrades regardless of and in more circumstances than females. This is a factor for consideration, especially taking into account gender expectations regarding assertiveness and social boundaries when it comes to asking for more, and in this context, asking for more grades. Vice versa, females on average are only likely to ask for regrade in one class even if they have more than one class that necessitates regrade consideration. This trend could be attributed to the notion that with 1 course, more investment is required hence the motivation to work harder. Compared to a higher course load which requires time management and balance.
+This trend suggests that males are more likely to consider and ask for regrades compared to females in all categories of classes, except for those with 1 class. This translates to the fact that, speculatively, males are more likely to consider for regrades regardless of and in more circumstances than females. This is a factor for consideration, especially taking into account gender expectations regarding assertiveness and social boundaries when it comes to asking for more, and in this context, asking for more grades. Vice versa, females on average are only likely to ask for regrade in one class even if they have more than one class that necessitates regrade consideration. This trend could be attributed to the notion that with 1 course, more investment is required hence the motivation to work harder.Compared to a higher course load which requires time management and balance.
 
 Further analysis could explore potential reasons behind these disparities, such as differences in the types of courses taken by male and female students, variations in grading criteria, or individual attitudes toward requesting grade changes.
 
 ## Ethics and Biases
 
 To note, there are further pain points regarding the gendered nature of the dataset, making the analysis reductive. Previous research has remarked on the discrimination against people of sexual minority background in educational settings (LGBTQI+), which poses considerable alarm on how they would be unfavourable when it comes to regrade requests in a college setting [@WilliamsInstitute]. However, the study only assesses regrade requests from a binary gendered perspective since the participants identified as either males or females. This limits the study’s assessment of those who identify as non-binary, two-spirited or gender-fluid. Accordingly, we recognize that simplifying the gender spectrum to a mere binary of males and females can disregard the struggles non-binary people have against college discrimination (or re-grading in this paper’s context). Contextually, the original study simulates a classroom setting within a closed laboratory to survey the implications of regrade requests. The study required participants to perform their student identity and imitate their regrade request scenarios, which could have posited the students to have a ‘formal”, heteronormative identity to fit in with the study’s nature, modifying their overall behaviour. It drives students away from a typical scenario of regrade requests, where there is a big power difference between a student and an actual professor. 
-
 
 ## Limitations
 
