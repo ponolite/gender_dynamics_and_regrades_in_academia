@@ -2,7 +2,7 @@
 
 ## Overview of Repository
 
-This repository contains data, code and a paper that analyzes the gender identities of college students and whether or not this affects their regrade requests among professors. The dataset used for analysis was retrieved from openICPSR, under the package `Data and Code for: Ask and You Shall Receive?` by Li and Zahar. 
+This repository contains data, code and a paper that analyzes the gender identities of college students and whether or not this affects their regrade requests among professors based on course load and instructor gender. The dataset used for analysis was retrieved from openICPSR, under the package `Data and Code for: Ask and You Shall Receive?` by Li and Zahar. 
 
 ## File Structure
 
